@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { EmailSignup } from "@/components/email-signup";
 import { ItemCard } from "@/components/item-card";
@@ -17,13 +18,21 @@ export default function HomePage() {
   return (
     <>
       <section className="av-container av-hero">
-        <p className="av-eyebrow">Home &amp; kitchen · US and Canada</p>
-        <h1><span className="av-vs-amazon">Amazon</span> vs <span className="av-vs-costco">Costco</span>. Receipts, not hype.</h1>
-        <p className="av-lede">Every verdict shows the price, the date, and where it came from. When Costco wins, we say so, even though Costco pays us nothing.</p>
-        <div className="av-hero-actions">
-          <Link className="av-button" href="/us">US comparisons</Link>
-          <Link className="av-button av-button-ghost" href="/ca">Canada comparisons</Link>
+        <div className="av-hero-copy">
+          <p className="av-eyebrow"><span className="av-eyebrow-mark" /> Independent shopping field notes · US + Canada</p>
+          <h1><span className="av-vs-amazon">Amazon</span> vs <span className="av-vs-costco">Costco</span><br />Receipts, not hype.</h1>
+          <p className="av-lede">We compare the same item, the bundle, and the cost per use. Every verdict comes with a date and a source. When Costco wins, we say so.</p>
+          <div className="av-hero-actions">
+            <Link className="av-button" href="/us">Explore US receipts <span aria-hidden="true">↗</span></Link>
+            <Link className="av-button av-button-ghost" href="/ca">Canada in CAD</Link>
+          </div>
+          <div className="av-hero-proof"><span>01 / PRICE</span><span>02 / DATE</span><span>03 / VERDICT</span></div>
         </div>
+        <figure className="av-hero-media">
+          <Image src="/images/kitchen.jpg" alt="A home cook preparing a meal in a bright kitchen" width={1200} height={800} priority />
+          <figcaption><span>THE KITCHEN EDIT</span><span>Illustrative scene · sample comparisons</span></figcaption>
+          <span className="av-hero-stamp" aria-hidden="true">FIELD<br />TESTED*</span>
+        </figure>
       </section>
 
       <section className="av-container av-section" aria-labelledby="score-title">
@@ -32,12 +41,12 @@ export default function HomePage() {
       </section>
 
       <section className="av-container av-section" aria-labelledby="featured-title">
-        <div className="av-section-head"><h2 id="featured-title">Latest showdowns (US)</h2><Link href="/us" className="av-small">All US items</Link></div>
+        <div className="av-section-head"><div><p className="av-kicker">Fresh from the notebook</p><h2 id="featured-title">Latest showdowns <span className="av-heading-note">/ US</span></h2></div><Link href="/us" className="av-small av-arrow-link">All US items <span aria-hidden="true">↗</span></Link></div>
         <div className="av-grid">{featured.map((item) => <ItemCard key={item.slug} item={item} market="us" />)}</div>
       </section>
 
       <section className="av-container av-section" aria-labelledby="categories-title">
-        <div className="av-section-head"><h2 id="categories-title">Categories</h2></div>
+        <div className="av-section-head"><div><p className="av-kicker">Browse the shelves</p><h2 id="categories-title">Categories</h2></div></div>
         <div className="av-grid">
           {categories.map((category) => (
             <article className="av-card" key={category.slug}>
@@ -53,7 +62,7 @@ export default function HomePage() {
       </section>
 
       <section className="av-container av-section" aria-labelledby="videos-title">
-        <div className="av-section-head"><h2 id="videos-title">From our videos</h2></div>
+        <div className="av-section-head"><div><p className="av-kicker">Watch, then check the receipt</p><h2 id="videos-title">From our videos</h2></div></div>
         <div className="av-panel">
           {videos.map((video) => (
             <div className="av-video" key={video.id}>
